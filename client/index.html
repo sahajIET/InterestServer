@@ -1,17 +1,29 @@
 <html>
     <script>
-        const a=document.getElementById('principal').value;
-        const b=document.getElementById('rate').value;
-        const c=document.getElementById('time').value;
-
-        fetch("http://localhost:3000/interest?principal="+a+"&rate="+b+"&time="+c)
+        function calcInterest()
+        {
+            const a=document.getElementById('principal').value;
+            const b=document.getElementById('rate').value;
+            const c=document.getElementById('time').value;
+            
+            fetch("https://sum-server.100xdevs.com/interest?principal="+a+"&rate="+b+"&time="+c)
+                    .then(function(response){
+                        response.json()
+                        .then(function(data){
+                            console.log(data);
+                            document.getElementById('interest').innerHTML="Total = "+JSON.stringify(data.total)+"<br>"+
+                                                                                "Interest = "+JSON.stringify(data.interest);
+                        })
+                    })
+        }
+        
     </script>
     <body>
-        <input id="principal" type="number" placeholder="Enter the Principal Amount"> <br>
-        <input id="rate" type="number" placeholder="Enter the rate"> <br>
-        <input id="time" type="number" placeholder="Enter the time in years"> <br>
+        <input id="principal" type="number" placeholder="Enter the Principal Amount"> <br><br>
+        <input id="rate" type="number" placeholder="Enter the rate"> <br><br>
+        <input id="time" type="number" placeholder="Enter the time in years"> <br><br>
 
-        <button>Calculate Interest</button>
+        <button onclick="calcInterest()" >Calculate Interest</button>
         <div id="interest"></div>
     </body>
 </html>
