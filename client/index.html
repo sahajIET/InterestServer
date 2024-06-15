@@ -1,5 +1,13 @@
 <html>
     <script>
+        let timeOut;
+        function debouncing()
+        {
+            clearTimeout(timeOut);
+            timeOut = setTimeout(() => {
+                calcInterest();
+            }, 1000);
+        }
         function calcInterest()
         {
             const a=document.getElementById('principal').value;
@@ -19,11 +27,10 @@
         
     </script>
     <body>
-        <input id="principal" type="number" placeholder="Enter the Principal Amount"> <br><br>
-        <input id="rate" type="number" placeholder="Enter the rate"> <br><br>
-        <input id="time" type="number" placeholder="Enter the time in years"> <br><br>
+        <input oninput="debouncing()" id="principal" type="number" placeholder="Enter the Principal Amount"> <br><br>
+        <input oninput="debouncing()" id="rate" type="number" placeholder="Enter the rate"> <br><br>
+        <input oninput="debouncing()" id="time" type="number" placeholder="Enter the time in years"> <br><br>
 
-        <button onclick="calcInterest()" >Calculate Interest</button>
         <div id="interest"></div>
     </body>
 </html>
